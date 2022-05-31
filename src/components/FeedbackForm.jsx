@@ -1,9 +1,8 @@
 import React from 'react'
 import Card from './shared/Card'
-import { useState } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import Button from './shared/Button'
 import RatingSelect from './RatingSelect'
-import { useContext } from 'react'
 import FeedbackContext from './context/FeedbackContext'
 
 
@@ -13,11 +12,17 @@ function FeedbackForm ( )  {
     const [message, setMessage] = useState('')
     const [rating, setRating] = useState(10)
 
-    const {addFeedback} = useContext(FeedbackContext)
+    const {addFeedback, feedbackEdit, updateFeedback} = useContext(FeedbackContext)
 
+    useEffect(() => {
+        if(feedbackEdit.edit === true) { 
+            setBtnDisabled(false)
+            setText(feedbackEdit.item.text)
+            setRating(feedbackEdit.item.rating)
+        }}, [feedbackEdit])
 
-    const handleTextChange = (e) => {
-        setText(e.target.value)
+    const handleTextChange = ({target: {value}}) => {
+
         if(text === '') {
             setBtnDisabled(true)
             setMessage(null)
@@ -29,6 +34,7 @@ function FeedbackForm ( )  {
             setMessage(null)
             setBtnDisabled(false)
         }
+        setText(value)
     }
 
     const handleSubmit = (e) => {
@@ -38,7 +44,12 @@ function FeedbackForm ( )  {
             text,
             rating
         }
-        addFeedback(newFeedback)
+        if(feedbackEdit.edit === true) {
+            updateFeedback(feedbackEdit.item.id, newFeedback) 
+        } else {
+            addFeedback(newFeedback)
+        }
+        
         setText('')
       }
     }
@@ -47,7 +58,7 @@ return (
 <Card>
         <form onSubmit={handleSubmit}>
             <h2> How would you rate your service with us?</h2>
-            <RatingSelect select={() => setRating(rating)}/>
+            <RatingSelect select={setRating} selected={rating} />
             <div className="input-group">
                 <input onChange={handleTextChange} type="text" 
                 placeholder="write a review" value={text} />
