@@ -8,7 +8,7 @@
     "server": "nodemon backend/server.js",
     "client": "npm start --prefix frontend",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "build":"(npm i) & (npm i --prefix frontend) & (concurrently \"npm run server\" \"npm run client\")"
+    "build":"(npm i) & (npm install react-scripts --save --prefix frontend) & (concurrently \"npm run server\" \"npm run client\")"
   },
   "repository": {
     "type": "git",
