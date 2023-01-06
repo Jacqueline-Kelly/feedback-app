@@ -19,7 +19,7 @@
   "bugs": {
     "url": "https://github.com/Jacqueline-Kelly/feedback-app/issues"
   },
-  "homepage": "https://github.com/Jacqueline-Kelly/feedback-app#readme",
+  "homepage": "https://github.com/Jacqueline-Kelly/feedback-app",
   "dependencies": {
     "concurrently": "^7.5.0",
     "dotenv": "^16.0.3",
