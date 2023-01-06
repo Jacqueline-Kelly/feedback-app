@@ -12,7 +12,7 @@ const getFeedbackList = asyncHandler(async(req, res) => {
 }) 
 
 const submitFeedback = asyncHandler(async(req,res) => {
-    console.log(req.body.data)
+
     const {email, text, rating} = req.body.data
     
     if(!email || !text || !rating) {
@@ -20,7 +20,6 @@ const submitFeedback = asyncHandler(async(req,res) => {
         throw new Error('Please be sure to include your email, feedback, and rating')     
     }
 
-    console.log(email,text)
     const feedback = await Feedback.create({
             email,
             text,
@@ -30,10 +29,7 @@ const submitFeedback = asyncHandler(async(req,res) => {
     if (!feedback) {
         res.status(400)
         throw new Error('Could not create feedback')
-    } else {
-        console.log(feedback)
     }
-
 
     res.status(201).json(feedback).end()
 })
@@ -54,10 +50,9 @@ const deleteFeedback = asyncHandler(async(req,res) => {
 })
 
 const editFeedback = asyncHandler(async(req, res) => {
-    console.log('req.body is', req.body)
 
     const feedback = await Feedback.findById(req.body.id)
-    console.log(feedback)
+
     if(!feedback) {
         res.status(404)
         throw new Error('Could not find feedback')

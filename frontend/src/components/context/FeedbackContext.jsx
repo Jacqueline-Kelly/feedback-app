@@ -33,7 +33,7 @@ export const FeedbackProvider = ( {children} ) => {
 
     const updateFeedback = async (id, updItem) => {
         const response = await axios.put(API_URL, {id: id, item: updItem})
-        console.log(response)
+
         fetchFeedback()
 
         setFeedbackEdit({
@@ -43,7 +43,7 @@ export const FeedbackProvider = ( {children} ) => {
     }
 
     const editFeedback = (item) => {
-        console.log('editfeedback item is', item)
+
             setFeedbackEdit({
             item: item,
             edit: true
@@ -51,7 +51,6 @@ export const FeedbackProvider = ( {children} ) => {
     
     const addFeedback = async (newFeedback) => {
         const response = await axios.post(API_URL, {data: newFeedback})
-        console.log(response)
         fetchFeedback()
     }
 
