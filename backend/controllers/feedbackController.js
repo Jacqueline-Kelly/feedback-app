@@ -12,6 +12,7 @@ const getFeedbackList = asyncHandler(async(req, res) => {
 }) 
 
 const submitFeedback = asyncHandler(async(req,res) => {
+    console.log(req.body.data)
     const {email, text, rating} = req.body
     if(!email || !text || !rating) {
         res.status(400)
