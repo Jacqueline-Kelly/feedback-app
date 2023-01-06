@@ -19,7 +19,7 @@ function FeedbackItem({item}) {
                     <FaEdit color='purple' />
             </button>
             <div className= "text-display">{item.text}</div>
-            <div className="text-display">{item.email}</div>
+            {/* <div className="text-display">{item.email}</div> */}
             
         </Card>
     )

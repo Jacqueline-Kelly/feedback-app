@@ -57,6 +57,7 @@ function FeedbackForm ( )  {
         }
         
         setText('')
+        setEmail('')
       }
     }
 

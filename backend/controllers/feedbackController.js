@@ -13,17 +13,28 @@ const getFeedbackList = asyncHandler(async(req, res) => {
 
 const submitFeedback = asyncHandler(async(req,res) => {
     console.log(req.body.data)
-    const {email, text, rating} = req.body
+    const {email, text, rating} = req.body.data
+    
     if(!email || !text || !rating) {
         res.status(400)
         throw new Error('Please be sure to include your email, feedback, and rating')     
     }
+
+    console.log(email,text)
     const feedback = await Feedback.create({
-        email,
-        text,
-        rating
+            email,
+            text,
+            rating
     })
-    console.log(req)
+
+    if (!feedback) {
+        res.status(400)
+        throw new Error('Could not create feedback')
+    } else {
+        console.log(feedback)
+    }
+
+
     res.status(201).json(feedback).end()
 })
 

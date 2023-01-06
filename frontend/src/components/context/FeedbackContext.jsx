@@ -52,6 +52,7 @@ export const FeedbackProvider = ( {children} ) => {
     const addFeedback = async (newFeedback) => {
         const response = await axios.post(API_URL, {data: newFeedback})
         console.log(response)
+        fetchFeedback()
     }
 
     return (
