@@ -32,8 +32,6 @@ const App = () => {
             </div>
         </Router>
         </FeedbackProvider>
-       
-        
     )
 }
   

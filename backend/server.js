@@ -4,6 +4,10 @@ const dotenv = require('dotenv').config()
 const connectDB = require('./config/db')
 const PORT = process.env.PORT || 2000;
 
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config({path: __dirname+'/.env'});
+  }
+
 connectDB()
 
 const app = express();
@@ -13,5 +17,19 @@ app.use(express.urlencoded({extended:false}))
 
 app.use('/api', require('./routes/feedbackRoutes'))
 
+// Serving frontend
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, '../frontend/build')))
+
+    app.get('*', (req, res) => 
+      res.sendFile(__dirname, '../', 'frontend', 'build', 'index.html'));
+} else {
+    app.get('/', (req,res) => {
+        res.status(200).json({ message: 'Welcome to the review website'})
+    })
+}
+  
+
 app.listen(PORT, (err) => console.log(err), 
-() => console.log("Server listening on PORT", PORT))
+    () => console.log("Server listening on PORT", PORT))
+  
