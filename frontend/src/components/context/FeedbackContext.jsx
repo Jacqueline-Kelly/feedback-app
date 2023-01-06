@@ -25,27 +25,32 @@ export const FeedbackProvider = ( {children} ) => {
 
     const deleteFeedback = async (item) => {
         if (window.confirm('Are you sure you want to delete?')) {
-            // console.log(id, {id}, JSON.stringify(id))
-            console.log(item, JSON.stringify(item))
-            await axios.delete(API_URL,{ data: item})
+
+            await axios.delete(API_URL, {data: item})
             fetchFeedback()
         }   
     }
 
     const updateFeedback = async (id, updItem) => {
-        const response = await axios.put(API_URL, JSON.stringify(updItem))
+        const response = await axios.put(API_URL, {id: id, item: updItem})
         console.log(response)
         fetchFeedback()
+
+        setFeedbackEdit({
+            item: {},
+            edit: false
+        })
     }
 
     const editFeedback = (item) => {
+        console.log('editfeedback item is', item)
             setFeedbackEdit({
-            item,
+            item: item,
             edit: true
         })}
     
     const addFeedback = async (newFeedback) => {
-        const response = await axios.post(API_URL,JSON.stringify(newFeedback))
+        const response = await axios.post(API_URL, {data: newFeedback})
         console.log(response)
     }
 

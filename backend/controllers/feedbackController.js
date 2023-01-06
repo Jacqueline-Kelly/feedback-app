@@ -42,16 +42,19 @@ const deleteFeedback = asyncHandler(async(req,res) => {
 })
 
 const editFeedback = asyncHandler(async(req, res) => {
-    const feedback = await Feedback.findById()
+    console.log('req.body is', req.body)
 
+    const feedback = await Feedback.findById(req.body.id)
+    console.log(feedback)
     if(!feedback) {
         res.status(404)
         throw new Error('Could not find feedback')
     }
-    const updatedFeedback = await feedback.findByIdAndUpdate(
-        req.body._id,
-        req.body,
+    const updatedFeedback = await Feedback.findByIdAndUpdate(
+        req.body.id,
+        req.body.item,
     )
+   
     res.status(200).json(updatedFeedback)
 
 })
