@@ -7,7 +7,7 @@ import FeedbackContext from './context/FeedbackContext'
 
 
 function FeedbackItem({item}) {
-    const { deleteFeedback, editFeedback, confirmEmail } = useContext(FeedbackContext)
+    const { confirmEmail } = useContext(FeedbackContext)
 
 
     return (
