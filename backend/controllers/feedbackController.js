@@ -72,7 +72,7 @@ const confirmEmail = asyncHandler(async(req, res) => {
     const emailInput = req.body.email
 
     if(itemEmail === emailInput) {
-        ///forward to editFeedback
+
         res.status(200).json('Success')
     }
     else {

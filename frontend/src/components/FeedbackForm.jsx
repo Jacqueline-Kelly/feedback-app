@@ -20,6 +20,7 @@ function FeedbackForm ( )  {
             setBtnDisabled(false)
             setText(feedbackEdit.item.text)
             setRating(feedbackEdit.item.rating)
+            setEmail(feedbackEdit.item.email)
         }}, [feedbackEdit])
 
     const handleTextChange = ({target: {value}}) => {

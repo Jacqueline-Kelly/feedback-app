@@ -42,12 +42,18 @@ export const FeedbackProvider = ( {children} ) => {
         })
     }
 
-    const confirmEmail = async(item) => {
+    const confirmEmail = async(item, option) => {
         const email = prompt('Please enter the email submitted with this feeback')
         const response = await axios.post(API_URL+'confirm/', {item: item, email: email})
+        
         if (response.status === 200) {
             console.log(response.status)
-            editFeedback(item) 
+            if (option === 'edit') {
+                editFeedback(item) 
+            }
+            else if(option === 'delete') {
+                deleteFeedback(item)
+            }
         }
         else {
             console.log(response.status)
