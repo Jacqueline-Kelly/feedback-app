@@ -66,9 +66,24 @@ const editFeedback = asyncHandler(async(req, res) => {
 
 })
 
+const confirmEmail = asyncHandler(async(req, res) => {
+    const itemEmail = req.body.item.email
+
+    const emailInput = req.body.email
+
+    if(itemEmail === emailInput) {
+        ///forward to editFeedback
+        res.status(200).json('Success')
+    }
+    else {
+        res.status(404).json('Failure')
+    }
+})
+
 module.exports = {
     getFeedbackList,
     submitFeedback,
     deleteFeedback,
+    confirmEmail,
     editFeedback
 }

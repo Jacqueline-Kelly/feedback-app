@@ -4,12 +4,14 @@ const {
     getFeedbackList, 
     submitFeedback,
     editFeedback,
-    deleteFeedback
+    deleteFeedback,
+    confirmEmail
 } = require('../controllers/feedbackController')
 
 router.get('/', getFeedbackList) 
 router.post('/', submitFeedback)
 router.delete('/', deleteFeedback)
 router.put('/', editFeedback)
+router.post('/confirm', confirmEmail)
 
 module.exports = router

@@ -42,8 +42,19 @@ export const FeedbackProvider = ( {children} ) => {
         })
     }
 
-    const editFeedback = (item) => {
+    const confirmEmail = async(item) => {
+        const email = prompt('Please enter the email submitted with this feeback')
+        const response = await axios.post(API_URL+'confirm/', {item: item, email: email})
+        if (response.status === 200) {
+            console.log(response.status)
+            editFeedback(item) 
+        }
+        else {
+            console.log(response.status)
+        }
+    }
 
+    const editFeedback = (item) => {
             setFeedbackEdit({
             item: item,
             edit: true
@@ -56,7 +67,15 @@ export const FeedbackProvider = ( {children} ) => {
     }
 
     return (
-        <FeedbackContext.Provider value={{ feedback, feedbackEdit, isLoading, deleteFeedback, addFeedback, editFeedback, updateFeedback }}>
+        <FeedbackContext.Provider value={{ feedback, 
+        feedbackEdit, 
+        isLoading, 
+        deleteFeedback, 
+        addFeedback, 
+        editFeedback, 
+        updateFeedback,
+        confirmEmail
+         }}>
             {children}
         </FeedbackContext.Provider>
     )

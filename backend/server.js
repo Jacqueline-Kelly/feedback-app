@@ -4,9 +4,6 @@ const dotenv = require('dotenv').config()
 const connectDB = require('./config/db')
 const PORT = process.env.PORT || 2000;
 
-if (process.env.NODE_ENV !== 'production') {
-    require('dotenv').config({path: __dirname+'/.env'});
-  }
 
 connectDB()
 
